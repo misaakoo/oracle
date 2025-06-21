@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>ワンオラクル タロット</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    /* スムーズスクロール */
+    html { scroll-behavior: smooth; }
+
+    /* リセット＆本文中央寄せ */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: sans-serif; text-align: center; line-height:1.6; }
+    a { text-decoration: none; color: #333; }
+
+    /* ボタン共通 */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 0.5em;
+      background: #347;
+      color: #fff;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* ヘッダー・ナビ */
+    header nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 1em 0;
+    }
+    header nav ul li img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* ギャラリー */
+    #cards .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      max-width: 800px;
+      margin: 0 auto 2em;
+    }
+    #cards img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: block;
+    }
+
+    /* 各セクション余白 */
+    section { padding: 2em 1em; }
+    h2 { margin-bottom: 0.5em; }
+    ul { margin: 1em auto; }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="#cards">
+            <img src="icons/cards.svg" width="40" alt="カード一覧"><br>
+            カード一覧
+          </a>
+        </li>
+        <li>
+          <a href="#explanation">
+            <img src="icons/explain.svg" width="40" alt="解説"><br>
+            解説
+          </a>
+        </li>
+        <li>
+          <a href="#qa">
+            <img src="icons/qa.svg" width="40" alt="Q&A"><br>
+            Q&A
+          </a>
+        </li>
+        <li>
+          <a href="#about">
+            <img src="icons/about.svg" width="40" alt="About"><br>
+            About
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ヒーロー -->
+  <section id="hero">
+    <h1>ワンオラクル タロット</h1>
+    <p>今日知りたいことをカードに聞いてみよう！</p>
+    <img src="images/hero.jpg" alt="タロットイメージ" style="max-width:100%;height:auto;">
+    <p>
+      <a class="btn" href="result.html">カードを引く</a>
+    </p>
+  </section>
+
+  <!-- ヒント三か条 -->
+  <section id="hints">
+    <h2>占うときのヒント</h2>
+    <ul style="list-style: decimal inside; display:inline-block; text-align:left;">
+      <li>同じ質問は繰り返さない</li>
+      <li>引く前に深呼吸してリラックス</li>
+      <li>悪い結果もヒントに変えよう</li>
+    </ul>
+    <p>
+      <a class="btn" href="#explanation">ワンオラクル解説を見る</a>
+    </p>
+  </section>
+
+  <!-- カード一覧 -->
+  <section id="cards">
+    <h2>カード一覧</h2>
+    <div class="grid">
+      <!-- 0～21まで順番に -->
+      <a href="result.html?index=0"><img src="cards/card0.png"  alt="カード0：愚者"></a>
+      <a href="result.html?index=1"><img src="cards/card1.png"  alt="カード1：魔術師"></a>
+      <a href="result.html?index=2"><img src="cards/card2.png"  alt="カード2：女教皇"></a>
+      <a href="result.html?index=3"><img src="cards/card3.png"  alt="カード3：女帝"></a>
+      <a href="result.html?index=4"><img src="cards/card4.png"  alt="カード4：皇帝"></a>
+      <a href="result.html?index=5"><img src="cards/card5.png"  alt="カード5：法王"></a>
+      <a href="result.html?index=6"><img src="cards/card6.png"  alt="カード6：恋人"></a>
+      <a href="result.html?index=7"><img src="cards/card7.png"  alt="カード7：戦車"></a>
+      <a href="result.html?index=8"><img src="cards/card8.png"  alt="カード8：力"></a>
+      <a href="result.html?index=9"><img src="cards/card9.png"  alt="カード9：隠者"></a>
+      <a href="result.html?index=10"><img src="cards/card10.png" alt="カード10：運命の輪"></a>
+      <a href="result.html?index=11"><img src="cards/card11.png" alt="カード11：正義"></a>
+      <a href="result.html?index=12"><img src="cards/card12.png" alt="カード12：吊された男"></a>
+      <a href="result.html?index=13"><img src="cards/card13.png" alt="カード13：死神"></a>
+      <a href="result.html?index=14"><img src="cards/card14.png" alt="カード14：節制"></a>
+      <a href="result.html?index=15"><img src="cards/card15.png" alt="カード15：悪魔"></a>
+      <a href="result.html?index=16"><img src="cards/card16.png" alt="カード16：塔"></a>
+      <a href="result.html?index=17"><img src="cards/card17.png" alt="カード17：星"></a>
+      <a href="result.html?index=18"><img src="cards/card18.png" alt="カード18：月"></a>
+      <a href="result.html?index=19"><img src="cards/card19.png" alt="カード19：太陽"></a>
+      <a href="result.html?index=20"><img src="cards/card20.png" alt="カード20：審判"></a>
+      <a href="result.html?index=21"><img src="cards/card21.png" alt="カード21：世界"></a>
+    </div>
+  </section>
+
+  <!-- 解説 -->
+  <section id="explanation">
+    <h2>ワンオラクル解説</h2>
+    <p>● 質問のポイント<br>
+       ● 具体的な例<br>
+       ● 注意点 などを詳しくご紹介します。</p>
+  </section>
+
+  <!-- Q&A -->
+  <section id="qa">
+    <h2>Q&amp;A</h2>
+    <p><strong>Q1.</strong> 同じ質問を何度もしてもいい？<br>
+       <strong>A.</strong> 一度結果を受け入れて、時間をおいてから実行しましょう。</p>
+    <p><strong>Q2.</strong> 悪い結果が出たら？<br>
+       <strong>A.</strong> 回避のヒントとして行動指針に変えてみてください。</p>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About</h2>
+    <p>ワンオラクルは１枚引きのタロット占いです。<br>
+       質問を具体的にイメージして引くことで、深いヒントが得られます。</p>
+  </section>
+
+  <footer style="padding:2em 0">
+    <p>&copy; 2025 ワンオラクル</p>
+  </footer>
+
+</body>
+</html>
