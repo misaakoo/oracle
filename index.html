@@ -6,7 +6,9 @@
   <title>ワンオラクル タロット</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
  <style>
-  /* カスタムプロパティ */
+  /*------------------------
+    カスタムプロパティ
+  ------------------------*/
   :root {
     --header-height-mobile: 50px;
     --header-height-desktop: 70px;
@@ -17,7 +19,14 @@
     --btn-radius: 12px;
   }
 
-  /* スムーズスクロールとオフセット */
+  /*------------------------
+    リセット & グローバル
+  ------------------------*/
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height-mobile);
@@ -27,274 +36,151 @@
       scroll-padding-top: var(--header-height-desktop);
     }
   }
-
-  /* リセット */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
   body {
+    background-color: #fcebff;   /* クリーム色 */
     font-family: sans-serif;
     text-align: center;
     line-height: 1.6;
-    padding-top: var(--header-height-mobile);
+    margin: 0;
+  }
+
+  /*------------------------
+    中央コンテナ（白帯）
+  ------------------------*/
+.container {
+  background-color: #FFFFFF;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+}
+
+  /*------------------------
+    固定ヘッダー
+  ------------------------*/
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height-mobile);
+    background-color: #f2f2f2;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   @media (min-width: 768px) {
-    body {
-      padding-top: var(--header-height-desktop);
-    }
-  }
-
- /* 固定ヘッダー */
     header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--header-height-mobile);
-      background-color: #f2f2f2;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: var(--header-height-desktop);
     }
-    @media (min-width: 768px) {
-      header { height: var(--header-height-desktop); }
-    }
+  }
+  header nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--nav-gap-mobile);
+  }
+  @media (min-width: 768px) {
     header nav {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0 var(--nav-gap-mobile);
+      padding: 0 var(--nav-gap-desktop);
     }
-    @media (min-width: 768px) {
-      header nav { padding: 0 var(--nav-gap-desktop); }
-    }
+  }
+  header nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--nav-gap-mobile);
+  }
+  @media (min-width: 768px) {
     header nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: var(--nav-gap-mobile);
-      margin: 0;
-      padding: 0;
+      gap: var(--nav-gap-desktop);
     }
-    @media (min-width: 768px) {
-      header nav ul { gap: var(--nav-gap-desktop); }
-    }
-    header nav ul li a {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: var(--header-height-mobile);
-      height: var(--header-height-mobile);
-      background-color: #fff;
-      border-radius: 50%;
-      text-decoration: none;
-      overflow: hidden;
-    }
-    @media (min-width: 768px) {
-      header nav ul li a {
-        width: var(--header-height-desktop);
-        height: var(--header-height-desktop);
-      }
-    }
-    header nav ul li a img {
-      width: var(--icon-size-mobile);
-      height: auto;
-    }
-    @media (min-width: 768px) {
-      header nav ul li a img { width: var(--icon-size-desktop); }
-    }
-    header nav ul li a span {
-      display: block;
-      font-size: 0.6rem;
-      line-height: 1;
-      text-align: center;
-      padding-top: 2px;
-    }
-    @media (min-width: 768px) {
-      header nav ul li a span { font-size: 0.75rem; }
-    }
-
-    /* セクション共通 */
-    .divider_block { width: 100%; height: 1px; background: #ddd; margin: 2em 0; }
-    .for_more_detail.tarot { max-width: 800px; margin: 0 auto; padding: 2em; background: #fff0f5; border-radius: 8px; margin-top: calc(var(--header-height-mobile) + 1em); }
-    @media (min-width: 768px) { .for_more_detail.tarot { margin-top: calc(var(--header-height-desktop) + 1em); } }
-    .article_ttl_h1 { font-size: 2rem; margin-bottom: 1em; text-align: center; position: relative; }
-    .underline_wide_img { display: block; width: 100px; height: 4px; background: #ff6685; margin: 0.5em auto; border-radius: 2px; }
-    .telling { margin-bottom: 2em; }
-    .telling .topic { font-weight: bold; margin-bottom: 0.5em; }
-    .telling .number { list-style: decimal inside; margin-left: 1em; margin-bottom: 0.25em; }
-    .telling .sub { display: block; margin-left: 2em; font-size: 0.9rem; margin-bottom: 0.25em; }
-    .articles { display: flex; flex-direction: column; gap: 2em; }
-    .article { background: #fafafa; padding: 1.5em; border-radius: 8px; }
-    .article_h2, .article_h3 { margin-bottom: 0.75em; }
-    .article_h3.sub { font-size: 1.1rem; margin-top: 1.5em; }
-    .text_main { line-height: 1.8; margin-bottom: 1em; }
-    .dot { list-style: disc inside; margin-left: 1em; margin-bottom: 1em; }
-
-    /* トピック画像の収めるスタイル */
-    .topic_img {
-      text-align: center;
-      margin-bottom: 1em;
-      overflow: hidden;
-    }
-    .topic_img img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* その他のスタイル */
-    .divider_block {
-      width: 100%;
-      height: 1px;
-      background: #ddd;
-      margin: 2em 0;
-    }
-    .for_more_detail.tarot {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2em;
-      background: #fff0f5;
-      border-radius: 8px;
-      margin-top: calc(var(--header-height-mobile) + 1em);
-    }
-    @media (min-width: 768px) {
-      .for_more_detail.tarot {
-        margin-top: calc(var(--header-height-desktop) + 1em);
-      }
-    }
-    .article_ttl_h1 {
-      font-size: 2rem;
-      margin-bottom: 1em;
-      position: relative;
-      text-align: center;
-    }
-    .article_ttl_h1 .underline_wide_img {
-      display: block;
-      width: 100px;
-      height: 4px;
-      background: #ff6685;
-      margin: 0.5em auto;
-      border-radius: 2px;
-    }
-    .telling {
-      margin-bottom: 2em;
-    }
-    .telling .topic {
-      font-weight: bold;
-      margin-bottom: 0.5em;
-    }
-    .telling .number {
-      list-style: decimal inside;
-      margin-left: 1em;
-      margin-bottom: 0.25em;
-    }
-    .telling .sub {
-      display: block;
-      margin-left: 2em;
-      font-size: 0.9rem;
-      margin-bottom: 0.25em;
-    }
-    .articles {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
-    }
-    .article {
-      background: #fafafa;
-      padding: 1.5em;
-      border-radius: 8px;
-    }
-    .article_h2, .article_h3 {
-      margin-bottom: 0.75em;
-    }
-    .article_h3.sub {
-      font-size: 1.1rem;
-      margin-top: 1.5em;
-    }
-    .text_main {
-      line-height: 1.8;
-      margin-bottom: 1em;
-    }
-    .dot {
-      list-style: disc inside;
-      margin-left: 1em;
-      margin-bottom: 1em;
-    }
-  /* ボタン共通 */
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 0.5em;
-    background: rgb(225, 166, 240);
-    color: #fff;
-    border: none;
-    border-radius: var(--btn-radius);
-    cursor: pointer;
+  }
+  header nav ul li a {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: var(--header-height-mobile);
+    height: var(--header-height-mobile);
+    background-color: #fff;
+    border-radius: 50%;
     text-decoration: none;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    header nav ul li a {
+      width: var(--header-height-desktop);
+      height: var(--header-height-desktop);
+    }
+  }
+  header nav ul li a img {
+    width: var(--icon-size-mobile);
+    height: auto;
+  }
+  @media (min-width: 768px) {
+    header nav ul li a img {
+      width: var(--icon-size-desktop);
+    }
+  }
+  header nav ul li a span {
+    display: block;
+    font-size: 0.6rem;
+    line-height: 1;
+    padding-top: 2px;
+  }
+  @media (min-width: 768px) {
+    header nav ul li a span {
+      font-size: 0.75rem;
+    }
   }
 
-  /* セクション共通 padding */
+  /*------------------------
+    セクション共通
+  ------------------------*/
   section {
     padding: 2em 1em;
   }
-  section#hero {
-    padding-top: 1em;
-  }
-
-  /*— 上部セクション（中央揃え） —*/
+ section#hero {
+  /* 上下左右の余白を増やしてゆったり見せる */
+  margin-top: 2em;       /* 上にマージン */
+  padding: 7em 1em 2em;  /* 上:4em 右左:1em 下:3em */
+}
   section#hero,
   section#hints,
   section#cards {
     text-align: center;
   }
 
-  /*— カード一覧 —*/
+  /*------------------------
+    ヒント & カード一覧
+  ------------------------*/
+  section#hints,
+  section#cards {
+    background-color: #FFFFFF;   /* 白いブロック */
+    border-radius: 8px;
+    margin: 2em 0;
+    padding: 2em 1em;
+  }
   #cards .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 10px;
-    max-width: 800px;
     margin: 0 auto 2em;
+    max-width: 800px;
   }
   #cards img {
     width: 100%;
-    height: auto;
     border: 1px solid #ccc;
     border-radius: 4px;
-    display: block;
   }
 
-  /*— ヒントセクション内ボタン —*/
-  section#hero .btn,
-  section#hints .btn {
-    display: inline-block;
-  }
-
-  /* Back to top ボタン */
-  #backToTop {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    background: #daa0e9;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 1000;
-  }
-
-  /*— 下部セクション（幅制限・左揃え） —*/
+   /*— 下部セクション（幅制限・左揃え） —*/
   section#explanation,
   section#qa,
   section#about {
@@ -303,98 +189,6 @@
     text-align: left;
     line-height: 1.6;
   }
-
-  /*— 解説セクション固有 —*/
-  #explanation {
-    background: #fff;
-    position: relative;
-  }
-  #explanation::before {
-    content: "02";
-    position: absolute;
-    top: 1em;
-    left: 1em;
-    font-size: 6rem;
-    color: rgba(0, 0, 0, 0.05);
-    z-index: -1;
-  }
-  #explanation .block {
-    margin-bottom: 2.5em;
-  }
-  #explanation h3 {
-    margin-bottom: 0.75em;
-    font-size: 1.25rem;
-    border-bottom: 2px solid #333;
-    display: inline-block;
-  }
-  #explanation .examples {
-    background: #f9f9f9;
-    padding: 1.5em;
-    border-radius: 8px;
-  }
-  #explanation .label.bad {
-    background: #888;
-  }
-  #explanation .label.good {
-    background: #4caf50;
-  }
-
-  /* 目次のリンクをブロック表示に */
-.toc-block a {
-  display: block;
-  margin: 0.5em 0;
-  text-decoration: none;
-  color: inherit;
-}
-
-/* 質問箇条書きを囲むブロック */
-.question-block {
-  background-color: #ffeef2;  /* 優しいピンク系 */
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 2em;
-}
-
-/* Bad／Goodラベルをピンク系の丸角に */
-.label.bad {
-  background: #ffb3c1;       /* 淡いピンク */
-  color: #fff;
-  border-radius: 8px;
-  padding: 2px 6px;
-}
-.label.good {
-  background: #ff6685;       /* 少し濃いピンク */
-  color: #fff;
-  border-radius: 8px;
-  padding: 2px 6px;
-}
-.image-container img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* 目次セクション全体 */
-.toc-section {
-  background-color: #ffe4e1;
-  padding: 16px;
-  border-radius: 8px;
-  margin: 2em 0;
-}
-
-/* 目次タイトル */
-.toc-section .toc-title {
-  text-align: center;
-  font-size: 1.25rem;
-  margin-bottom: 1em;
-}
-
-/* 目次リンク群 */
-.toc-section .toc-links {
-  text-align: left;
-}
-
 /* 各リンクをブロック表示＆改行 */
 .toc-section .toc-links a {
   display: block;
@@ -575,7 +369,111 @@ section {
 }
 
 
-/* 質問例ブロック */
+
+  /*------------------------
+    Divider
+  ------------------------*/
+  .divider_block {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin: 2em 0;
+  }
+
+  /*------------------------
+    ボタン共通
+  ------------------------*/
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgb(225, 166, 240);
+    color: #fff;
+    border: none;
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0.5em;
+  }
+
+  /*------------------------
+    Back to top
+  ------------------------*/
+  #backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #daa0e9;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    border: none;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+  }
+
+  /*------------------------
+    解説・Q&A・About 共通コンテナ
+  ------------------------*/
+  .for_more_detail.tarot {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #ffffff;   /* 白背景 */
+    border-radius: 8px;
+    margin-top: calc(var(--header-height-mobile) + 1em);
+  }
+  @media (min-width: 768px) {
+    .for_more_detail.tarot {
+      margin-top: calc(var(--header-height-desktop) + 1em);
+    }
+  }
+  .article_ttl_h1 {
+    font-size: 2rem;
+    text-align: center;
+    position: relative;
+    margin-bottom: 1em;
+  }
+  .article_ttl_h1 .underline_wide_img {
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: #ff6685;
+    margin: 0.5em auto;
+    border-radius: 2px;
+  }
+
+  /*------------------------
+    各記事ブロック（.article）
+  ------------------------*/
+  .article {
+    background-color: #fafafa;   /* デフォルト淡グレー */
+    padding: 1.5em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+  }
+  .article_h2,
+  .article_h3 {
+    margin-bottom: 0.75em;
+  }
+  .article_h3.sub {
+    font-size: 1.1rem;
+    margin-top: 1.5em;
+  }
+  .text_main {
+    line-height: 1.8;
+    margin-bottom: 1em;
+  }
+  .dot {
+    list-style: disc inside;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+
+  /* 質問例ブロック */
 .example-block {
   background: #fff0f5;
   border: 1px solid #ffd3e2;
@@ -602,12 +500,145 @@ section {
   margin-top: 0.8em;
   line-height: 1.6;
 }
-.bad { border-color: #e74c3c; color: #e74c3c; }
-.good { border-color: #2ecc71; color: #2ecc71; }
+
+  /*------------------------
+    画像ラッパー
+  ------------------------*/
+  .topic_img {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .topic_img img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /*------------------------
+    ワンオラクル解説固有カスタム
+  ------------------------*/
+  /* 目次部分をで囲む */
+  .for_more_detail.tarot .telling {
+    background-color: #f7edf3;
+    padding: 1em;
+    border-radius: 8px;
+    margin-bottom: 2em;
+  }
+  /* 解説内記事は白に */
+  .for_more_detail.tarot .article {
+    background-color: #ffffff !important;
+  }
+  /* 解説の画像部分も白い箱に */
+  .for_more_detail.tarot .topic_img {
+    background-color: #ffffff;
+    padding: 1em;
+    border-radius: 8px;
+  }
+  /* すぐに使える質問例を */
+  .for_more_detail.tarot .example-block {
+    background-color: #f7edf3;
+    border: 1px solid #f7edf3;
+    padding: 1.2em;
+    margin-bottom: 2em;
+    border-radius: 8px;
+  }
+/*------------------------
+  セクションタイトルの装飾
+------------------------*/
+.section-title {
+  position: relative;
+  display: inline-block;      /* 下線をテキスト幅に揃えたいならinline-blockに */
+  padding-bottom: 0.25em;     /* 下線と文字の隙間 */
+  margin: 2em 0 1em;          /* 上下マージンはお好みで */
+  font-size: 1.5rem;          /* 見出しサイズ */
+  color: #333;                /* 文字色 */
+  border-bottom: 1px solid #333;  /* 下線 */
+  z-index: 1;
+}
+
+/* 背後に大きく薄い数字を置く */
+.section-title::before {
+  content: attr(data-number);
+  position: absolute;
+  top: -0.5em;                /* 数字の縦位置調整 */
+  left: 0;                    /* 数字の横位置 */
+  font-size: 6rem;            /* 背景数字の大きさ */
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.05); /* 薄いグレー */
+  z-index: -1;                /* テキストより背面 */
+}
+
+/* レスポンシブで数字を少し小さくしたい場合 */
+@media (max-width: 767px) {
+  .section-title::before {
+    font-size: 4rem;
+    top: -0.3em;
+  }
+}
+
+/* ── 目次ブロック共通 ── */
+.toc-block {
+  background-color: #f7edf3;    /* クリーム色の背景 */
+  border-radius: 8px;
+  padding: 2em 1.5em;
+  margin-bottom: 2em;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* タイトル */
+.toc-title {
+  position: relative;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid #333;
+}
+
+/* リスト本体 */
+.toc-list {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: toc-counter;
+}
+.toc-list > li {
+  counter-increment: toc-counter;
+  margin-bottom: 0.75em;
+}
+/* 番号の数字 */
+.toc-num {
+  display: inline-block;
+  width: 2em;
+  color: #AAA;
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+/* リンク全体を左揃えブロックに */
+.toc-list a,
+.toc-sublist a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  text-align: left;
+}
+
+/* サブリスト */
+.toc-sublist {
+  list-style: none;
+  padding-left: 2.5em;
+  margin-top: 0.25em;
+}
+.toc-sublist li {
+  margin-bottom: 0.5em;
+}
+
 </style>
+
 
 </head>
 <body>
+   <div class="container">
   <!-- ヘッダー -->
    <header>
     <nav>
@@ -623,7 +654,7 @@ section {
   <section id="hero">
     <h1>ワンオラクル タロット</h1>
     <p>今日知りたいことをカードに聞いてみよう！</p>
-    <img src="images/hero.png" alt="タロットイメージ" style="max-width:100%;height:500px;">
+    <img src="images/hero.png" alt="タロットイメージ" style="max-width:100%;height:300px;">
     <p><a class="btn" href="result.html">カードを引く</a></p>
   </section>
 
@@ -669,26 +700,36 @@ section {
   </section>
 
   <!-- 解説セクション -->
-  <section id="explanation">
-    <a id="h1_1"></a>
-    <div class="divider_block"></div>
-    <div class="for_more_detail tarot">
-      <h1 class="article_ttl_h1"><span>タロット占い ワンオラクル解説</span></h1>
-      <span class="underline_wide_img"></span>
-      <div class="telling">
-        <p class="topic">目次</p>
-        <li class="number"><a href="#h2_1">ワンオラクルとは？</a></li>
-        <li class="number"><a href="#h2_2">ワンオラクルでは具体的に質問しよう</a></li>
-        <span class="sub"><a href="#h3_1">質問のポイント</a></span>
-        <span class="sub"><a href="#h3_2">すぐに使える質問例</a></span>
-      </div>
+<section id="explanation">
+  <div class="divider_block"></div>
+  <div class="for_more_detail tarot">
+    <h1 class="article_ttl_h1"><span>ワンオラクルのやり方</span></h1>
+    <span class="underline_wide_img"></span>
+
+    <!-- ── 目次ブロック ── -->
+    <div class="toc-block">
+      <h3 class="toc-title" data-number="02">目次</h3>
+      <ol class="toc-list">
+        <li>
+          <a href="#h2_1"><span class="toc-num">01</span> ワンオラクルとは？</a>
+        </li>
+        <li>
+          <a href="#h2_2"><span class="toc-num">02</span> ワンオラクルでは具体的に質問しよう</a>
+          <ol class="toc-sublist">
+            <li><a href="#h3_1">質問のポイント</a></li>
+            <li><a href="#h3_2">すぐに使える質問例</a></li>
+          </ol>
+        </li>
+      </li>
+      </ol>
+    </div>
       <div class="articles">
-        <h2 id="h2_1" class="article_h2">ワンオラクルとは？</h2>
+ <h2 id="h2_1" class="section-title" data-number="01">ワンオラクルとは？</h2>
         <div class="article">
           <div class="topic_img"><img src="images/orakuru.png" alt="ワンオラクルのイメージ"></div>
           <p class="text_main">ワンオラクルは、タロットカードを1枚だけ引いて、そのカードから得られるメッセージやアドバイスを読み解く占術です。シンプルにテーマを絞ることで、的確な示唆を受け取ることができます。</p>
         </div>
-        <h2 id="h2_2" class="article_h2">ワンオラクルでは具体的に質問しよう</h2>
+  <h2 id="h2_2" class="section-title" data-number="02">ワンオラクルでは具体的に質問しよう</h2>
         <div class="article">
           <p class="text_main">ワンオラクルは一問一答です。より具体的な質問を頭に浮かべましょう。</p>
           <h3 id="h3_1" class="article_h3 sub">質問のポイント</h3>
@@ -726,6 +767,33 @@ section {
     うまくいくかどうかの結果をタロットに求めると…（以下解説）
   </p>
 </div>
+ <div class="example-block">
+  <div class="bad_good">
+    <span class="label bad">Bad</span>
+    <p><b>彼氏はできる？</b></p>
+  </div>
+  <div class="bad_good">
+    <span class="label good">Good</span>
+    <p><b>半年以内に結婚を前提とした相手と付き合うにはどうすればいい？</b></p>
+  </div>
+  <p class="text_sub">
+    「彼氏はできる？」だと漠然としすぎています…（以下解説）
+  </p>
+</div>
+
+<div class="example-block">
+  <div class="bad_good">
+    <span class="label bad">Bad</span>
+    <p><b>今回のプレゼンはうまくいく？</b></p>
+  </div>
+  <div class="bad_good">
+    <span class="label good">Good</span>
+    <p><b>プレゼンを成功させるために必要な準備や心構えは？</b></p>
+  </div>
+  <p class="text_sub">
+    うまくいくかどうかの結果をタロットに求めると…（以下解説）
+  </p>
+</div>
  </section>
 
   <!-- Q&Aセクション -->
@@ -735,11 +803,23 @@ section {
     <div class="for_more_detail tarot">
       <h1 class="article_ttl_h1"><span>ワンオラクルQ&A</span></h1>
       <span class="underline_wide_img"></span>
-      <div class="telling">
-        <p class="topic">目次</p>
-        <li class="number"><a href="#h3_3">Q1. 同じ質問を何度もしてもいいの？</a></li>
-        <li class="number"><a href="#h3_4">Q2. 悪い結果がでたらどうすればいいの？</a></li>
-      </div>
+     <div class="toc-block">
+  <h3 class="toc-title" data-number="03">目次</h3>
+  <ol class="toc-list">
+    <li>
+      <a href="#h3_3">
+        <span class="toc-num">01</span>
+        Q1. 同じ質問を何度もしてもいいの？
+      </a>
+    </li>
+    <li>
+      <a href="#h3_4">
+        <span class="toc-num">02</span>
+        Q2. 悪い結果がでたらどうすればいいの？
+      </a>
+    </li>
+  </ol>
+</div>
       <div class="articles">
         <div class="article">
           <h3 id="h3_3" class="article_h3 sub">Q1. 同じ質問を何度もしてもいいの？</h3>
@@ -760,10 +840,18 @@ section {
     <div class="for_more_detail tarot">
       <h1 class="article_ttl_h1"><span>About</span></h1>
       <span class="underline_wide_img"></span>
-      <div class="telling">
-        <p class="topic">目次</p>
-        <li class="number"><a href="#about_content">概要</a></li>
-      </div>
+     <div class="toc-block">
+  <h3 class="toc-title" data-number="04">目次</h3>
+  <ol class="toc-list">
+    <li>
+      <a href="#about_content">
+        <span class="toc-num">01</span>
+        概要
+      </a>
+    </li>
+  </ol>
+</div>
+
       <div class="articles">
         <div id="about_content" class="article">
           <p class="text_main">ワンオラクルは１枚引きのタロット占いです。質問を具体的にイメージして引くことで、深いヒントが得られます。</p>
@@ -776,6 +864,10 @@ section {
   <footer style="padding:2em 0">
     <p>&copy; 2025 ワンオラクル</p>
   </footer>
+
+
+ </div>
+
 
    <!-- Back to top ボタン -->
   <button id="backToTop" title="トップへ戻る">↑</button>
