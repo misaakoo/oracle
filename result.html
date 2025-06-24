@@ -8,13 +8,25 @@
     /* リセット＆本文中央寄せ */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: sans-serif; text-align: center; padding: 1em; }
-    a { text-decoration: none; color: #333; }
+    a { text-decoration: none; color: #daa0e9; }
+
+    /* ボタン共通 */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 0.5em;
+      background: #dbabf0;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
 
     /* カード表示 */
     #cardContainer { max-width: 600px; margin: 0 auto 2em; text-align: center; }
     #cardTitle { font-size: 1.8em; margin-top: 0.5em; }
     #cardSubTitle { font-size: 1.2em; color: #666; margin-bottom: 0.5em; }
-    #cardImg { display: block; margin: 0.5em auto; max-width: 100%; height: auto; }
+    #cardImg { display: block; margin: 0.5em auto; width: 80%; max-width: 300px; height: auto; }
 
     /* 詳細セクション：常に1列、中央揃え */
     .details { display: flex; flex-direction: column; gap: 1.5em; align-items: center; }
@@ -22,8 +34,7 @@
     .detail-section h3 { font-size: 1.4em; margin-bottom: 0.5em; color: #347; }
     .detail-section p { line-height: 1.6; }
 
-    /* ボタン */
-    .btn { display: inline-block; padding: 10px 20px; margin: 1em; background: #347; color: #fff; border-radius: 4px; cursor: pointer; white-space: nowrap; }
+    /* シェアボタン配置 */
     .share-buttons { display: flex; flex-direction: column; gap: 1em; align-items: center; margin-top: 2em; }
   </style>
 </head>
@@ -32,7 +43,7 @@
   <div id="cardContainer">
     <h2 id="cardTitle"></h2>
     <p id="cardSubTitle"></p>
-    <img id="cardImg" src="https://via.placeholder.com/300x200?text=カード画像サンプル" alt="カードイメージサンプル">
+    <img id="cardImg" src="cards/0.png" alt="カードイメージサンプル">
   </div>
 
   <!-- 詳細を一気に表示 -->
@@ -123,13 +134,11 @@
 
     const params = new URLSearchParams(location.search);
     let idx = parseInt(params.get("index"), 10);
-    if (isNaN(idx) || idx < 0 || idx > 21) {
-      idx = Math.floor(Math.random() * 22);
-    }
+    if (isNaN(idx) || idx < 0 || idx > 21) idx = Math.floor(Math.random() * 22);
 
     document.getElementById("cardTitle").textContent = `#${idx} ${titles[idx]}`;
     document.getElementById("cardSubTitle").textContent = messages[idx];
-    document.getElementById("cardImg").src = `cards/card${idx}.png`;
+    document.getElementById("cardImg").src = `cards/${idx}.png`;
 
     document.getElementById("workDetail").textContent = details[idx].work;
     document.getElementById("relationDetail").textContent = details[idx].relation;
@@ -145,5 +154,10 @@
         .catch(()=> alert("コピーに失敗しました。"));
     });
   </script>
+</body>
+</html>
+
+  <!-- Resultからindexに戻るボタン -->
+  <a id="homeBtn" href="index.html" class="btn">サイトトップに戻る</a>
 </body>
 </html>
