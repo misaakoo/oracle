@@ -402,20 +402,19 @@ section#hints h2 {
     document.getElementById("otherDetail").textContent = details[idx].other;
 
 
-     const currentUrl = location.href;
-    const cardHash = `#${idx} ${titles[idx]}`;
-    const mainMsg = messages[idx];
-    const detail = details[idx];
-    const shareText =
-      `ワンオラクルの結果\n` +
-      `${cardHash} 「${mainMsg}」\n\n` +
-      `${currentUrl}`;
+     // 共有用テキストを組み立て
+  const currentUrl = location.href;
+  const tweetText = 
+    `ワンオラクルの結果\n` +
+    `#${idx} ${titles[idx]} 「${messages[idx]}」`;
 
-    // X（Twitter）用のリンクをセット
-    const shareX = document.getElementById("shareX");
-    shareX.href = 
-      `https://twitter.com/intent/tweet?` +
-      `text=${encodeURIComponent(shareText)}`;
+  // ① text と ② url、両方を intent に渡す
+  const tweetUrl = 
+    `https://twitter.com/intent/tweet?` +
+    `text=${encodeURIComponent(tweetText)}` +
+    `&url=${encodeURIComponent(currentUrl)}`;
+
+  document.getElementById("shareX").href = tweetUrl;
   </script>
     </div><!-- /.container -->
 </body>
