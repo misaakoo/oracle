@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <title>ワンオラクル タロット</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <style>
   /*------------------------
     カスタムプロパティ
@@ -43,10 +42,12 @@
     color: #333;
     line-height: 1.6;
     text-align: center;
+    margin: 0;
+    overflow-x: hidden; /* 横スクロール防止 */
   }
 
   /*------------------------
-    中央コンテナ（白帯）
+    中央コンテナ
   ------------------------*/
   .container {
     background-color: #FFFFFF;
@@ -71,10 +72,10 @@
     width: 100%;
     height: var(--header-height-mobile);
     background-color: #f2f2f2;
-    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
   }
   @media (min-width: 768px) {
     header {
@@ -191,24 +192,24 @@
   }
 
   /*------------------------
-    解説・Q&A・About 共通コンテナ
+    解説・Q&A・About の背景を解除
   ------------------------*/
   .for_more_detail.tarot {
-    background-color: #fafafa;  /* 淡グレー */
-    border-radius: 8px;
-    padding: 2em;
+    background: transparent;
+    border-radius: 0;
+    padding: 2em 0;
     margin-top: calc(var(--header-height-mobile) + 1em);
-    box-sizing: border-box;
   }
   @media (min-width: 768px) {
     .for_more_detail.tarot {
       max-width: 800px;
       margin: calc(var(--header-height-desktop) + 1em) auto 0;
+      padding: 2em 0;
     }
   }
 
   /*------------------------
-    目次ブロック
+    目次ブロック（センター寄せ）
   ------------------------*/
   .toc-block {
     background-color: #f7edf3;
@@ -216,10 +217,11 @@
     padding: 2em 1.5em;
     margin-bottom: 2em;
     box-sizing: border-box;
+    text-align: center;
   }
   .toc-list {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
     counter-reset: toc-counter;
   }
   .toc-list > li {
@@ -234,14 +236,16 @@
     margin-right: 0.5em;
   }
   .toc-list a {
-    display: block;
+    display: inline-block;
     text-decoration: none;
     color: #333;
+    text-align: left;
   }
   .toc-sublist {
     list-style: none;
     padding-left: 2.5em;
     margin-top: 0.25em;
+    text-align: left;
   }
   .toc-sublist li {
     margin-bottom: 0.5em;
@@ -256,7 +260,6 @@
     padding-bottom: 0.25em;
     margin: 2em 0 1em;
     font-size: 1.5rem;
-    color: #333;
     border-bottom: 1px solid #333;
     z-index: 1;
   }
@@ -305,7 +308,7 @@
   }
 
   /*------------------------
-    質問例ブロック
+    すぐ使える質問例
   ------------------------*/
   .example-block {
     background: #fff0f5;
@@ -341,13 +344,18 @@
   }
 
   /*------------------------
-    Divider
+    画像ラッパー（中央揃え & はみ出し防止）
   ------------------------*/
-  .divider_block {
-    width: 100%;
-    height: 1px;
-    background: #ddd;
-    margin: 2em 0;
+  .topic_img {
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 1em;
+  }
+  .topic_img img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
   }
 
   /*------------------------
@@ -382,42 +390,19 @@
     border: none;
     cursor: pointer;
     display: none;
-    align-items: center;
-    justify-content: center;
     z-index: 1000;
   }
 
   /*------------------------
-    画像ラッパー
-  ------------------------*/
-  .topic_img {
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .topic_img img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
-  }
-
-  /*------------------------
-    モバイル時：淡グレー枠を100％幅に
+    モバイル用：横の紫帯を消す（overflow-x:hidden）
   ------------------------*/
   @media (max-width: 767px) {
-    .for_more_detail.tarot {
-      width: 100%;
-      max-width: none;
-      margin: calc(var(--header-height-mobile) + 1em) 0 0;
-      padding: 1.5em;
-    }
-    .toc-block {
-      width: 100%;
-      max-width: none;
-      padding: 2em 1em;
+    html, body {
+      overflow-x: hidden;
     }
   }
 </style>
+
 
 </head>
 <body>
