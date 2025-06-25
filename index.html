@@ -10,10 +10,10 @@
     カスタムプロパティ
   ------------------------*/
   :root {
-    --header-height-mobile: 50px;
-    --header-height-desktop: 70px;
-    --icon-size-mobile: 24px;
-    --icon-size-desktop: 40px;
+    --header-height-mobile: 70px;
+    --header-height-desktop: 80px;
+    --icon-size-mobile: 100px;
+    --icon-size-desktop: 100px;
     --nav-gap-mobile: 8px;
     --nav-gap-desktop: 16px;
     --btn-radius: 12px;
@@ -80,66 +80,72 @@
       height: var(--header-height-desktop);
     }
   }
-  header nav {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 var(--nav-gap-mobile);
-  }
+ /* ナビを.container と同じ幅に */
+header nav {
+  /* もともとの高さ・内部レイアウトはそのまま */
+  width: 90%;            /* .container と同じ */
+  max-width: 800px;      /* .container の max-width と同じ */
+  margin: 0 auto;        /* 中央寄せ */
+  padding: 0;            /* 既存の左右 padding は不要になるのでリセット */
+}
+
   @media (min-width: 768px) {
     header nav {
       padding: 0 var(--nav-gap-desktop);
     }
   }
-  header nav ul {
-    list-style: none;
-    display: flex;
-    gap: var(--nav-gap-mobile);
-  }
-  @media (min-width: 768px) {
-    header nav ul {
-      gap: var(--nav-gap-desktop);
-    }
-  }
-  header nav ul li a {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: var(--header-height-mobile);
-    height: var(--header-height-mobile);
-    background-color: #fff;
-    border-radius: 50%;
-    text-decoration: none;
-    overflow: hidden;
-  }
-  @media (min-width: 768px) {
-    header nav ul li a {
-      width: var(--header-height-desktop);
-      height: var(--header-height-desktop);
-    }
-  }
-  header nav ul li a img {
-    width: var(--icon-size-mobile);
-    height: auto;
-  }
-  @media (min-width: 768px) {
-    header nav ul li a img {
-      width: var(--icon-size-desktop);
-    }
-  }
-  header nav ul li a span {
-    display: block;
-    font-size: 0.6rem;
-    line-height: 1;
-    padding-top: 2px;
-  }
-  @media (min-width: 768px) {
-    header nav ul li a span {
-      font-size: 0.75rem;
-    }
-  }
+/* ───────────────────────────────────────────────
+   ヘッダーナビ：アイコンを大きく＆幅を均等に配置
+──────────────────────────────────────────────── */
 
+/* ① li を flex:1 で均等幅に */
+header nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+header nav ul li {
+  flex: 1;                /* 各アイテムを等幅に */
+  display: flex;
+  justify-content: center;
+}
+
+/* ② a を大きく・正方形に */
+header nav ul li a {
+  width: 64px;            /* モバイル時のサイズ */
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+@media (min-width: 768px) {
+  header nav ul li a {
+    width: 80px;          /* デスクトップ時のサイズ */
+    height: 80px;
+  }
+}
+
+/* ③ アイコン画像を拡大 */
+header nav ul li a img {
+  width: 40px;            /* モバイル時 */
+  height: auto;
+}
+@media (min-width: 768px) {
+  header nav ul li a img {
+    width: 40px;          /* デスクトップ時 */
+  }
+}
+
+/* ④ ラベル（span）との間隔調整 */
+header nav ul li a span {
+  margin-top: 4px;
+  font-size: 0.75rem;
+}
   /*------------------------
     セクション共通
   ------------------------*/
@@ -733,6 +739,106 @@ section {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* ────────────────────────────────────────────
+   ヒーローセクション（#hero）の余白と見出しサイズ統一
+──────────────────────────────────────────── */
+
+/* 見出しと本文の間 */
+section#hero h1 {
+  margin-bottom: 0.75em;       /* 見出し下に空ける */
+  font-size: 2rem;             /* 他セクションの<h1>と同じサイズに */
+  line-height: 1.2;
+}
+
+/* 本文（サブテキスト）と画像の間 */
+section#hero p {
+  margin: 0.5em 0 1.5em;       /* 上:0.5em / 下:1.5em */
+  font-size: 1rem;
+}
+
+/* 画像とボタンの間 */
+section#hero img {
+  display: block;
+  margin: 0 auto 1.5em;        /* 下に余白 */
+  max-width: 100%;
+  height: auto;
+}
+
+/* ボタンと下のセクションとの余白 */
+section#hero .btn {
+  margin-bottom: 2em;
+}
+
+/* もし「ワンオラクルのやり方」などの見出しが <h2> ならこちらも同サイズに */
+.article_ttl_h1, 
+section#hero h1 {
+  font-size: 2rem;
+}
+
+
+/* ────────────────────────────────────────────
+   カード一覧セクション：タイトル大きく＆画像との余白
+──────────────────────────────────────────── */
+section#cards h2 {
+  font-size: 2rem;        /* 見出しを大きく */
+  margin-bottom: 1.5em;   /* 下に余白をつくる */
+}
+
+section#cards .grid {
+  margin-top: 1em;        /* タイトルとの間を開ける */
+  gap: 12px;              /* カード同士の間隔も少し広げ */
+}
+
+/* ────────────────────────────────────────────
+   占うときのヒントセクション：タイトル＆番号リストの余白調整
+──────────────────────────────────────────── */
+section#hints h2 {
+  font-size: 2rem;        /* 見出しを大きく */
+  margin-bottom: 1em;     /* 下に余白 */
+}
+
+/* 内部の番号リスト（1.2.3）のブロック表示・余白 */
+section#hints ul {
+  display: inline-block;  
+  text-align: left;
+  margin: 1em auto 1.5em; /* タイトル→リスト→下ボタンの余白 */
+  padding-left: 1.2em;    /* 番号リストのインデント */
+  list-style: decimal inside;
+}
+section#hints ul li {
+  margin-bottom: 0.6em;   /* 各項目の間隔 */
+}
+
+/* 「占うときのヒント」セクションを相対位置に */
+section#hints {
+  position: relative;
+  overflow: visible;
+}
+
+/* 中の要素は前面に */
+section#hints > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 疑似要素１つでいびつ丸を見出し＋リストの裏に */
+section#hints::before {
+  content: "";
+  position: absolute;
+  /* サイズは調整OK */
+  width: 280px;
+  height: 260px;
+  background: rgba(242,224,255,0.8);
+  /* ちょいいびつに */
+  border-radius: 55% 45% 60% 40% / 50% 60% 40% 50%;
+  /* 見出しの下・真ん中あたりに */
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
 }
 </style>
 
