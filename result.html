@@ -428,19 +428,12 @@ section#hints {
 
 
 
-  const topPageUrl = 'index.html';
-
-  // ② ツイート本文を用意（お好みで編集）
-  const tweetText = 'ワンオラクル タロットで１枚引いてみよう！';
-        // ツイートに載せるテキストはそのまま使う
-  const tweetIntro = `ワンオラクルの結果\n#${idx} ${titles[idx]} 「${messages[idx]}」`;
-
-  // ③ X シェア用 href を組み立て
-  document.getElementById('shareX').href =
-    'https://twitter.com/intent/tweet?' +
-    `text=${encodeURIComponent(tweetText)}` +
-    `&url=${encodeURIComponent(topPageUrl)}`;
-
+const topPageUrl = 'https://misaakoo.github.io/oracle/index.html';
+const tweetText  = 'ワンオラクル タロットで１枚引いてみよう！';
+shareX.href = 
+  'https://twitter.com/intent/tweet?' +
+  `text=${encodeURIComponent(tweetText)}` +
+  `&url=${encodeURIComponent(topPageUrl)}`;
   </script>
     </div><!-- /.container -->
 </body>
