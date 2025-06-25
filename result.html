@@ -262,7 +262,34 @@ section#hints h2 {
 .hints-list li {
   margin-bottom: 0.5em;
 }
+/* ヒントと「やり方を見る」ボタンの間の余白 */
+section#hints {
+  margin-top: 2em;     /* details との隙間 */
+  margin-bottom: 3em;  /* ボタン群との隙間を広めに */
+}
 
+/* ヒントリスト自体の下余白 */
+.hints-list {
+  margin-bottom: 2em;  /* リンクボタンまでの余白 */
+}
+
+/* 「別のカード」「トップに戻る」ボタン群との間 */
+.nav-buttons {
+  margin-top: 2.5em;   /* ヒント ↓ ナビボタン の間隔 */
+  gap: 1em;            /* ボタン同士の間隔強調 */
+}
+
+/* Xシェアボタンとの間 */
+.share-buttons {
+  margin-top: 2.5em;   /* ナビボタン群 ↓ シェアボタン の間隔 */
+  gap: 1em;
+}
+
+/* もし .btn の上下マージンが小さすぎる場合は上書き */
+.nav-buttons .btn,
+.share-buttons .btn {
+  margin: 0.5em 0;     /* ボタン上下の余白を 0.5em に */
+}
   </style>
 </head>
 <body>
@@ -399,17 +426,19 @@ section#hints h2 {
     document.getElementById("otherDetail").textContent = details[idx].other;
 
 
-    // 1. 現在のページ URL（?index=… を含む）を取得
-  const currentUrl = location.href;
-
-  // 2. ツイート本文を組み立て
+      // ツイートに載せるテキストはそのまま使う
   const tweetIntro = `ワンオラクルの結果\n#${idx} ${titles[idx]} 「${messages[idx]}」`;
-  // URL を末尾に改行込みで付与
-  const tweetFull = `${tweetIntro}\n\n${currentUrl}`;
 
-  // 3. intent/tweet の text パラメータにエンコードしてセット
-  document.getElementById("shareX").href =
-    `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetFull)}`;
+  // 共有先を常に index.html に固定する
+  // （相対パスでOKなら 'index.html'、絶対で渡したい場合は location.origin + '/index.html'）
+  const topUrl = 'index.html';
+
+  // intent URL に text と url の両方を渡す
+  shareX.href =
+    'https://twitter.com/intent/tweet?' +
+    `text=${encodeURIComponent(tweetIntro)}` +
+    `&url=${encodeURIComponent(topUrl)}`;
+
   </script>
     </div><!-- /.container -->
 </body>
