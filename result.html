@@ -324,12 +324,9 @@ section#hints h2 {
 
   <!-- ―― ② 余分なハイフンは消しました ―― -->
 
-  <!-- ―― ③ 「Xでシェア」ボタンをここに移動 ―― -->
-  <div class="share-buttons">
-    <a id="shareX" class="btn share-btn" target="_blank">
-      <img src="icons/logo-black.png" alt="Xアイコン">
-    </a>
-  </div>
+ <a id="shareX" class="btn share-btn" target="_blank">
+  <img src="icons/logo-black.png" alt="Xアイコン">
+</a>
 
   <script>
     const titles = [
@@ -402,19 +399,17 @@ section#hints h2 {
     document.getElementById("otherDetail").textContent = details[idx].other;
 
 
-     // 共有用テキストを組み立て
+    // 1. 現在のページ URL（?index=… を含む）を取得
   const currentUrl = location.href;
-  const tweetText = 
-    `ワンオラクルの結果\n` +
-    `#${idx} ${titles[idx]} 「${messages[idx]}」`;
 
-  // ① text と ② url、両方を intent に渡す
-  const tweetUrl = 
-    `https://twitter.com/intent/tweet?` +
-    `text=${encodeURIComponent(tweetText)}` +
-    `&url=${encodeURIComponent(currentUrl)}`;
+  // 2. ツイート本文を組み立て
+  const tweetIntro = `ワンオラクルの結果\n#${idx} ${titles[idx]} 「${messages[idx]}」`;
+  // URL を末尾に改行込みで付与
+  const tweetFull = `${tweetIntro}\n\n${currentUrl}`;
 
-  document.getElementById("shareX").href = tweetUrl;
+  // 3. intent/tweet の text パラメータにエンコードしてセット
+  document.getElementById("shareX").href =
+    `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetFull)}`;
   </script>
     </div><!-- /.container -->
 </body>
