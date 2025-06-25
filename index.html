@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>ワンオラクル タロット</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
+ <style>
   /*------------------------
     カスタムプロパティ
   ------------------------*/
@@ -37,33 +37,31 @@
     }
   }
   body {
-    background-color: #fcebff;
+    background-color: #fcebff;   /* クリーム色 */
     font-family: sans-serif;
-    color: #333;
-    line-height: 1.6;
     text-align: center;
+    line-height: 1.6;
     margin: 0;
-    overflow-x: hidden; /* 横スクロール防止 */
   }
 
   /*------------------------
-    中央コンテナ
+    中央コンテナ（白帯）
   ------------------------*/
+.container {
+  background-color: #FFFFFF;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+@media (max-width: 767px) {
   .container {
-    background-color: #FFFFFF;
-    width: 90%;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 100%;
   }
-  @media (max-width: 767px) {
-    .container {
-      width: 100%;
-      padding: 0;
-    }
-  }
+}
 
   /*------------------------
-    固定ヘッダー（丸アイコン）
+    固定ヘッダー
   ------------------------*/
   header {
     position: fixed;
@@ -72,10 +70,10 @@
     width: 100%;
     height: var(--header-height-mobile);
     background-color: #f2f2f2;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
   }
   @media (min-width: 768px) {
     header {
@@ -83,6 +81,7 @@
     }
   }
   header nav {
+    height: 100%;
     display: flex;
     align-items: center;
     padding: 0 var(--nav-gap-mobile);
@@ -93,8 +92,8 @@
     }
   }
   header nav ul {
-    display: flex;
     list-style: none;
+    display: flex;
     gap: var(--nav-gap-mobile);
   }
   @media (min-width: 768px) {
@@ -130,6 +129,7 @@
     }
   }
   header nav ul li a span {
+    display: block;
     font-size: 0.6rem;
     line-height: 1;
     padding-top: 2px;
@@ -144,12 +144,13 @@
     セクション共通
   ------------------------*/
   section {
-    padding: 3em 1.5em;
+    padding: 2em 1em;
   }
-  section#hero {
-    margin-top: 2em;
-    padding: 7em 1em 2em;
-  }
+ section#hero {
+  /* 上下左右の余白を増やしてゆったり見せる */
+  margin-top: 2em;       /* 上にマージン */
+  padding: 7em 1em 2em;  /* 上:4em 右左:1em 下:3em */
+}
   section#hero,
   section#hints,
   section#cards {
@@ -161,7 +162,7 @@
   ------------------------*/
   section#hints,
   section#cards {
-    background-color: #FFFFFF;
+    background-color: #FFFFFF;   /* 白いブロック */
     border-radius: 8px;
     margin: 2em 0;
     padding: 2em 1em;
@@ -179,9 +180,7 @@
     border-radius: 4px;
   }
 
-  /*------------------------
-    下部セクション（幅制限・左揃え）
-  ------------------------*/
+   /*— 下部セクション（幅制限・左揃え） —*/
   section#explanation,
   section#qa,
   section#about {
@@ -190,172 +189,195 @@
     text-align: left;
     line-height: 1.6;
   }
+/* 各リンクをブロック表示＆改行 */
+.toc-section .toc-links a {
+  display: block;
+  margin: 0.25em 0;
+  text-decoration: none;
+  color: inherit;
+}
 
-  /*------------------------
-    解説・Q&A・About の背景を解除
-  ------------------------*/
-  .for_more_detail.tarot {
-    background: transparent;
-    border-radius: 0;
-    padding: 2em 0;
-    margin-top: calc(var(--header-height-mobile) + 1em);
-  }
-  @media (min-width: 768px) {
+/*--------------------------
+  全体のセクション余白を増やす
+---------------------------*/
+section {
+  padding: 3em 1.5em;  /* 上下:3em、左右:1.5em */
+}
+
+/*--------------------------
+  解説・Q&A 内の記事群にゆとり
+---------------------------*/
+.articles {
+  display: flex;
+  flex-direction: column;
+  gap: 2em; /* 記事同士の間隔 */
+}
+
+/*--------------------------
+  各記事ブロック .article にパディング
+---------------------------*/
+.article {
+  padding: 1.2em 1em;
+  background: #fafafa;
+  border-radius: 8px;
+  /* 任意で影を足すとさらに浮きます */
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+}
+
+/*--------------------------
+  見出しと本文の間の余白
+---------------------------*/
+.article_h2, .article_h3 {
+  margin-bottom: 0.75em;
+}
+
+.text_main {
+  margin-bottom: 1em;
+  line-height: 1.8;  /* 行間を少しゆったり */
+}
+
+/*--------------------------
+  箇条書き (<ul>, .dot) の項目間
+---------------------------*/
+.dot li, .question-points li {
+  margin-bottom: 0.5em;
+}
+
+/*--------------------------
+  質問ブロック全体の余白
+---------------------------*/
+.question-block {
+  margin: 2em 0;
+}
+
+/*--------------------------
+  質問例の Bad/Good セクションに余白
+---------------------------*/
+.bad_good {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+/*--------------------------
+  すぐ下のテキスト(sub)にもスペース
+---------------------------*/
+.text_sub {
+  margin-bottom: 1.5em;
+}
+
+/*--------------------------
+  example-block 自体にも余裕を
+---------------------------*/
+.example-block {
+  margin-bottom: 1.5em;
+  padding: 1.2em;
+}
+
+/*--------------------------
+  目次ブロック内リンクにも余白
+---------------------------*/
+.toc-section .toc-links a {
+  margin: 0.75em 0;  /* 上下:0.75em */
+}
+ /* 追加スタイル */
+    .divider_block {
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+      margin: 2em 0;
+    }
     .for_more_detail.tarot {
       max-width: 800px;
-      margin: calc(var(--header-height-desktop) + 1em) auto 0;
-      padding: 2em 0;
+      margin: 0 auto;
+      padding: 2em;
+      background: #fff0f5;
+      border-radius: 8px;
     }
-  }
-
-  /*------------------------
-    目次ブロック（センター寄せ）
-  ------------------------*/
-  .toc-block {
-    background-color: #f7edf3;
-    border-radius: 8px;
-    padding: 2em 1.5em;
-    margin-bottom: 2em;
-    box-sizing: border-box;
-    text-align: center;
-  }
-  .toc-list {
-    list-style: none;
-    padding: 0;
-    counter-reset: toc-counter;
-  }
-  .toc-list > li {
-    counter-increment: toc-counter;
-    margin-bottom: 0.75em;
-  }
-  .toc-num {
-    display: inline-block;
-    width: 2em;
-    color: #AAA;
-    font-weight: bold;
-    margin-right: 0.5em;
-  }
-  .toc-list a {
-    display: inline-block;
-    text-decoration: none;
-    color: #333;
-    text-align: left;
-  }
-  .toc-sublist {
-    list-style: none;
-    padding-left: 2.5em;
-    margin-top: 0.25em;
-    text-align: left;
-  }
-  .toc-sublist li {
-    margin-bottom: 0.5em;
-  }
-
-  /*------------------------
-    見出し装飾
-  ------------------------*/
-  .section-title {
-    position: relative;
-    display: inline-block;
-    padding-bottom: 0.25em;
-    margin: 2em 0 1em;
-    font-size: 1.5rem;
-    border-bottom: 1px solid #333;
-    z-index: 1;
-  }
-  .section-title::before {
-    content: attr(data-number);
-    position: absolute;
-    top: -0.5em;
-    left: 0;
-    font-size: 6rem;
-    line-height: 1;
-    color: rgba(0, 0, 0, 0.05);
-    z-index: -1;
-  }
-  @media (max-width: 767px) {
-    .section-title::before {
-      font-size: 4rem;
-      top: -0.3em;
+    .article_ttl_h1 {
+      font-size: 2rem;
+      margin-bottom: 1em;
+      position: relative;
+      text-align: center;
     }
-  }
+    .article_ttl_h1 .underline_wide_img {
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: #ff6685;
+      margin: 0.5em auto;
+      border-radius: 2px;
+    }
+    .telling {
+      margin-bottom: 2em;
+    }
+    .telling .topic {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+    .telling .number {
+      list-style: decimal inside;
+      margin-left: 1em;
+      margin-bottom: 0.25em;
+    }
+    .telling .sub {
+      display: block;
+      margin-left: 2em;
+      font-size: 0.9rem;
+      margin-bottom: 0.25em;
+    }
+    .articles {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+    .article {
+      background: #fafafa;
+      padding: 1.5em;
+      border-radius: 8px;
+    }
+    .article_h2, .article_h3 {
+      margin-bottom: 0.75em;
+    }
+    .article_h3.sub {
+      font-size: 1.1rem;
+      margin-top: 1.5em;
+    }
+    .text_main {
+      line-height: 1.8;
+      margin-bottom: 1em;
+    }
+    .dot {
+      list-style: disc inside;
+      margin-left: 1em;
+      margin-bottom: 1em;
+    }
+
+/* — Bad／Good を丸で囲む */
+.bad,
+.good {
+  display: inline-block;
+  border: 1px solid #333;      /* 枠線色 */
+  border-radius: 999px;         /* 丸く */
+  padding: 0.2em 0.6em;         /* 上下0.2em・左右0.6em */
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #333;                  /* 文字色 */
+  margin-right: 0.5em;          /* ラベルとテキストの隙間 */
+  vertical-align: middle;
+}
+
+
 
   /*------------------------
-    記事ブロック
+    Divider
   ------------------------*/
-  .article {
-    background-color: #ffffff;
-    padding: 1.5em;
-    border-radius: 8px;
-    margin-bottom: 1em;
-  }
-  .article_h2,
-  .article_h3 {
-    margin-bottom: 0.75em;
-  }
-  .article_h3.sub {
-    font-size: 1.1rem;
-    margin-top: 1.5em;
-  }
-  .text_main {
-    line-height: 1.8;
-    margin-bottom: 1em;
-  }
-  .dot {
-    list-style: disc inside;
-    margin-left: 1em;
-    margin-bottom: 1em;
-  }
-
-  /*------------------------
-    すぐ使える質問例
-  ------------------------*/
-  .example-block {
-    background: #fff0f5;
-    border: 1px solid #ffd3e2;
-    border-radius: 8px;
-    padding: 1.2em;
-    margin-bottom: 2em;
-  }
-  .example-block .bad_good {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5em;
-    margin-bottom: 0.8em;
-  }
-  .example-block p {
-    margin: 0.5em 0;
-  }
-  .text_sub {
-    margin-top: 0.8em;
-    line-height: 1.6;
-  }
-  .bad,
-  .good {
-    display: inline-block;
-    border: 1px solid #333;
-    border-radius: 999px;
-    padding: 0.2em 0.6em;
-    font-size: 0.9em;
-    font-weight: bold;
-    color: #333;
-    margin-right: 0.5em;
-    vertical-align: middle;
-  }
-
-  /*------------------------
-    画像ラッパー（中央揃え & はみ出し防止）
-  ------------------------*/
-  .topic_img {
-    text-align: center;
-    overflow: hidden;
-    margin-bottom: 1em;
-  }
-  .topic_img img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
+  .divider_block {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin: 2em 0;
   }
 
   /*------------------------
@@ -394,13 +416,324 @@
   }
 
   /*------------------------
-    モバイル用：横の紫帯を消す（overflow-x:hidden）
+    解説・Q&A・About 共通コンテナ
   ------------------------*/
-  @media (max-width: 767px) {
-    html, body {
-      overflow-x: hidden;
+  .for_more_detail.tarot {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #ffffff;   /* 白背景 */
+    border-radius: 8px;
+    margin-top: calc(var(--header-height-mobile) + 1em);
+  }
+  @media (min-width: 768px) {
+    .for_more_detail.tarot {
+      margin-top: calc(var(--header-height-desktop) + 1em);
     }
   }
+  .article_ttl_h1 {
+    font-size: 2rem;
+    text-align: center;
+    position: relative;
+    margin-bottom: 1em;
+  }
+  .article_ttl_h1 .underline_wide_img {
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: #ff6685;
+    margin: 0.5em auto;
+    border-radius: 2px;
+  }
+
+  /*------------------------
+    各記事ブロック（.article）
+  ------------------------*/
+  .article {
+    background-color: #fafafa;   /* デフォルト淡グレー */
+    padding: 1.5em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+  }
+  .article_h2,
+  .article_h3 {
+    margin-bottom: 0.75em;
+  }
+  .article_h3.sub {
+    font-size: 1.1rem;
+    margin-top: 1.5em;
+  }
+  .text_main {
+    line-height: 1.8;
+    margin-bottom: 1em;
+  }
+  .dot {
+    list-style: disc inside;
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+
+  /* 質問例ブロック */
+.example-block {
+  background: #fff0f5;
+  border: 1px solid #ffd3e2;
+  border-radius: 8px;
+  padding: 1.2em;
+  margin-bottom: 2em; /* ブロック間の余白 */
+}
+
+/* Bad/Good + 解説 の間隔 */
+.example-block .bad_good {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+/* — 各行の余白調整 */
+.example-block p {
+  margin: 0.5em 0;
+}
+
+/* — 解説テキスト */
+.text_sub {
+  margin-top: 0.8em;
+  line-height: 1.6;
+}
+
+  /*------------------------
+    画像ラッパー
+  ------------------------*/
+  .topic_img {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .topic_img img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /*------------------------
+    ワンオラクル解説固有カスタム
+  ------------------------*/
+  /* 目次部分をで囲む */
+  .for_more_detail.tarot .telling {
+    background-color: #f7edf3;
+    padding: 1em;
+    border-radius: 8px;
+    margin-bottom: 2em;
+  }
+  /* 解説内記事は白に */
+  .for_more_detail.tarot .article {
+    background-color: #ffffff !important;
+  }
+  /* 解説の画像部分も白い箱に */
+  .for_more_detail.tarot .topic_img {
+    background-color: #ffffff;
+    padding: 1em;
+    border-radius: 8px;
+  }
+  /* すぐに使える質問例を */
+  .for_more_detail.tarot .example-block {
+    background-color: #f7edf3;
+    border: 1px solid #f7edf3;
+    padding: 1em;
+    margin-bottom: 2em;
+    border-radius: 8px;
+  }
+/*------------------------
+  セクションタイトルの装飾
+------------------------*/
+.section-title {
+  position: relative;
+  display: inline-block;      /* 下線をテキスト幅に揃えたいならinline-blockに */
+  padding-bottom: 0.25em;     /* 下線と文字の隙間 */
+  margin: 2em 0 1em;          /* 上下マージンはお好みで */
+  font-size: 1.5rem;          /* 見出しサイズ */
+  color: #333;                /* 文字色 */
+  border-bottom: 1px solid #333;  /* 下線 */
+  z-index: 1;
+}
+
+/* 背後に大きく薄い数字を置く */
+.section-title::before {
+  content: attr(data-number);
+  position: absolute;
+  top: -0.5em;                /* 数字の縦位置調整 */
+  left: 0;                    /* 数字の横位置 */
+  font-size: 6rem;            /* 背景数字の大きさ */
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.05); /* 薄いグレー */
+  z-index: -1;                /* テキストより背面 */
+}
+
+/* レスポンシブで数字を少し小さくしたい場合 */
+@media (max-width: 767px) {
+  .section-title::before {
+    font-size: 4rem;
+    top: -0.3em;
+  }
+}
+
+/* ── 目次ブロック共通 ── */
+.toc-block {
+  background-color: #f7edf3;    /* クリーム色の背景 */
+  border-radius: 8px;
+  padding: 2em 1.5em;
+  margin-bottom: 2em;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* タイトル */
+.toc-title {
+  position: relative;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid #333;
+}
+
+/* リスト本体 */
+.toc-list {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: toc-counter;
+}
+.toc-list > li {
+  counter-increment: toc-counter;
+  margin-bottom: 0.75em;
+}
+/* 番号の数字 */
+.toc-num {
+  display: inline-block;
+  width: 2em;
+  color: #AAA;
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+/* リンク全体を左揃えブロックに */
+.toc-list a,
+.toc-sublist a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  text-align: left;
+}
+
+/* サブリスト */
+.toc-sublist {
+  list-style: none;
+  padding-left: 2.5em;
+  margin-top: 0.25em;
+}
+.toc-sublist li {
+  margin-bottom: 0.5em;
+}
+/* 目次のリンクを flex にして、番号と本文を同じ行に */
+.toc-block .toc-list > li > a {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;       /* 番号とテキストの間隔 */
+  text-decoration: none;
+}
+
+/* 番号部分 */
+.toc-block .toc-num {
+  flex-shrink: 0;
+  width: 2em;
+  text-align: right;
+  color: #AAA;
+  font-weight: bold;
+}
+
+/* サブリスト（質問のポイントなど）はブロック表示にしてインデント */
+.toc-block .toc-sublist {
+  list-style: none;
+  margin: 0.5em 0 0 2.5em;  /* 親項目からのインデント */
+  padding: 0;
+}
+.toc-block .toc-sublist li a {
+  display: block;
+  padding: 0.25em 0;
+}
+/* １段階目の箇条書き */
+.dot {
+  list-style: disc inside;
+  margin: 1em 0;
+  padding: 0 0 0 1.5em;
+}
+.dot > li {
+  margin-bottom: 0.5em;
+}
+
+/* ２段階目以降は丸→中黒などを変化させる */
+.dot li li {
+  list-style: circle inside;
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+/* 親コンテナの左右パディングを少し減らす */
+.for_more_detail.tarot {
+  padding: 2em 0.5em;         /* ← 以前は 2em だったものを 1em に */
+}
+
+/* 紫の example-block を左右いっぱいに */
+.for_more_detail.tarot .example-block {
+  margin: 0 -1em 2em;       /* 親の左右パディングと合わせて */
+  padding: 1.5em;           /* 中の余白はお好みで */
+  background-color: #f7edf3;
+  border-color:    #f7edf3;
+  border-radius: 8px;
+}
+/* +——— container の最大幅を広げる ———+ */
+.container {
+  max-width: 1100px;     /* 例：800 → 1000px にアップ */
+  width: 90%;
+}
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+}
+/*──────────────────────────
+  １．「質問のポイント」の箇条書きを
+     ドットの下にテキストが落ちないように
+──────────────────────────*/
+/* ベースの .dot は外側バレット＋本文インデント */
+.dot {
+  list-style: disc outside;    /* バレットは要素の外側に */
+  margin: 1em 0;               /* 前後余白 */
+  padding-left: 1.5em;         /* バレット分のインデント */
+}
+.dot > li {
+  margin-bottom: 0.5em;
+}
+
+/* ネスト２段目以降は中黒に */
+.dot li li {
+  list-style: circle outside;
+  margin-top: 0.5em;
+  margin-left: 1em;            /* 更に内側へ */
+}
+
+/*──────────────────────────
+  ２．「ワンオラクルとは？」の画像を
+     枠いっぱいに大きく見せる
+──────────────────────────*/
+/* .article { padding:1.5em } に合わせて左右に−1.5em はみ出し */
+.for_more_detail.tarot .articles > .article:first-of-type .topic_img {
+  margin: 0 -1.5em 1em;        /* 上:0  左右:-1.5em  下:1em */
+  padding: 0;                  /* もし余白があれば消す */
+}
+/* はみ出した親幅いっぱいに画像を引き伸ばす */
+.for_more_detail.tarot .articles > .article:first-of-type .topic_img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 </style>
 
 
@@ -471,7 +804,7 @@
 <section id="explanation">
   <div class="divider_block"></div>
   <div class="for_more_detail tarot">
-    <h1 class="article_ttl_h1"><span>ワンオラクルのやり方</span></h1>
+    <h2 class="article_ttl_h1"><span>ワンオラクルのやり方</span></h2>
     <span class="underline_wide_img"></span>
 
     <!-- ── 目次ブロック ── -->
