@@ -5,11 +5,186 @@
   <title>ワンオラクル 結果</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-    /* リセット＆本文中央寄せ */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: sans-serif; text-align: center; padding: 1em; }
+    /*―――― ヘッダー用の高さ変数 & ボディ余白 ――――*/
+    :root {
+      --header-height-mobile: 70px;
+      --header-height-desktop: 80px;
+      --nav-gap-desktop: 16px; /* index.html と同じ値 */
+    }
+    html {
+      scroll-padding-top: var(--header-height-mobile);
+      scroll-behavior: smooth;
+    }
+    @media (min-width: 768px) {
+      html {
+        scroll-padding-top: var(--header-height-desktop);
+      }
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      text-align: center;
+      /* ← ヘッダー高さ + 1em の上余白をここだけで設定 */
+      padding: calc(var(--header-height-mobile) + 1em) 1em 1em;
+    }
+    @media (min-width: 768px) {
+      body {
+        padding: calc(var(--header-height-desktop) + 1em) 1em 1em;
+      }
+    }
+    /*―――― ヘッダーまわり ――――*/
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: var(--header-height-mobile);
+      background-color: #f2f2f2;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      header { height: var(--header-height-desktop); }
+    }
+    header nav {
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    @media (min-width: 768px) {
+      header nav { padding: 0 var(--nav-gap-desktop); }
+    }
+    header nav ul {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    header nav ul li {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    header nav ul li a {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+    @media (min-width: 768px) {
+      header nav ul li a {
+        width: 80px; height: 80px;
+      }
+    }
+    header nav ul li a img {
+      width: 40px;
+      height: auto;
+    }
+    header nav ul li a span {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: #441c26 !important;
+    }
+    /*―――― コンテナ幅揃え ――――*/
+    .container {
+      background-color: #fff;
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    @media (max-width: 767px) {
+      .container { width: 100%; }
+    }
+    /*―――― 以下は result.html 用の既存スタイル ――――*/
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     a { text-decoration: none; color: #daa0e9; }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 0.5em;
+      background: #dbabf0;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #cardContainer {
+      max-width: 600px;
+      margin: 0 auto 2em;
+      text-align: center;
+    }
+    #cardTitle {
+      font-size: 1.8em;
+      margin-top: 0.5em;
+    }
+    #cardSubTitle {
+      font-size: 1.2em;
+      color: #666;
+      margin-bottom: 0.5em;
+    }
+    #cardImg {
+      display: block;
+      margin: 0.5em auto;
+      width: 80%;
+      max-width: 300px;
+      height: auto;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+      align-items: center;
+      margin-bottom: 2em;
+    }
+    .detail-section {
+      text-align: center;
+      max-width: 600px;
+    }
+    .detail-section h3 {
+      font-size: 1.4em;
+      margin-bottom: 0.5em;
+      color: #347;
+    }
+    .detail-section p {
+      line-height: 1.6;
+    }
+    .nav-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      align-items: center;
+      margin-top: 1.5em;
+    }
+    .share-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 1em;
+      justify-content: center;
+      margin-top: 2em;
+    }
+    .share-buttons .btn {
+      margin: 0;
+    }
+    .share-btn img {
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+    }
 
+       /* リセット＆本文中央寄せ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: #daa0e9; }
     /* ボタン共通 */
     .btn {
       display: inline-block;
@@ -34,11 +209,74 @@
     .detail-section h3 { font-size: 1.4em; margin-bottom: 0.5em; color: #347; }
     .detail-section p { line-height: 1.6; }
 
-    /* シェアボタン配置 */
-    .share-buttons { display: flex; flex-direction: column; gap: 1em; align-items: center; margin-top: 2em; }
+/* ―― A. 詳細セクションとボタン群のあいだを広げる ―― */
+.details {
+  margin-bottom: 2em;    /* 元は gap:1.5em だけだった箇所に、下部マージンを追加 */
+}
+
+/* ―― B. ナビゲーションボタン群 ―― */
+.nav-buttons {
+  display: flex;
+  flex-direction: column; /* 縦並び */
+  gap: 0.5em;             /* ボタン間の間隔 */
+  align-items: center;
+  margin-top: 1.5em;      /* 詳細→ナビボタンのすき間 */
+}
+
+/* ―― C. シェアボタンとの距離 ―― */
+.share-buttons {
+  margin-top: 2em;        /* ナビボタン群→シェアのすき間 */
+  gap: 1em;               /* Flexbox の gap でボタン間 */
+  display: flex;
+  flex-direction: row;    /* 横並び */
+  justify-content: center;
+}
+
+/* ―― D. 余分なマージン／ハイフンをリセット ―― */
+.btn {
+  margin: 0;              /* すべての .btn の余白リセット */
+}
+
+/* ―― E. 必要ならアイコンサイズを調整 ―― */
+.share-btn img {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+/* ヒント三か条のスタイル */
+section#hints {
+  margin-top: 2em;               /* 上の要素（details）とのすき間 */
+}
+section#hints h2 {
+  font-size: 1.4em;
+  margin-bottom: 0.8em;
+  color: #347;
+}
+.hints-list {
+  list-style: decimal inside;
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 1em;
+}
+.hints-list li {
+  margin-bottom: 0.5em;
+}
+
   </style>
 </head>
 <body>
+   <div class="container">
+ <header>
+      <nav>
+        <ul>
+          <li><a href="index.html"><img src="icons/01.png" alt="一覧"><span>一覧</span></a></li>
+          <li><a href="index.html#explanation"><img src="icons/02.png" alt="やり方"><span>やり方</span></a></li>
+          <li><a href="index.html#qa"><img src="icons/03.png" alt="Q&A"><span>Q&A</span></a></li>
+          <li><a href="index.html#about"><img src="icons/04.png" alt="About"><span>About</span></a></li>
+        </ul>
+      </nav>
+    </header>
   <!-- カード表示 -->
   <div id="cardContainer">
     <h2 id="cardTitle"></h2>
@@ -66,13 +304,31 @@
     </div>
   </div>
 
-  <!-- 別のカードを見る -->
-  <p><a id="reroll" class="btn" href="result.html">別のカードを見る</a></p>
 
-  <!-- シェアボタン -->
+ <!-- ★ ここから「ヒント三か条」セクションを追加 -->
+  <section id="hints">
+    <h2>占うときのヒント</h2>
+    <ul class="hints-list">
+      <li>同じ質問は繰り返さない</li>
+      <li>引く前に深呼吸してリラックス</li>
+      <li>悪い結果もヒントに変えよう</li>
+    </ul>
+    <p><a class="btn" href="index.html#explanation">ワンオラクルのやり方を見る</a></p>
+  </section>
+
+<!-- ―― ① まず「別のカードを引く」と「サイトトップに戻る」をまとめる ―― -->
+  <div class="nav-buttons">
+    <a id="reroll" class="btn" href="result.html">別のカードを引く</a>
+    <a id="homeBtn" class="btn" href="index.html">サイトトップに戻る</a>
+  </div>
+
+  <!-- ―― ② 余分なハイフンは消しました ―― -->
+
+  <!-- ―― ③ 「Xでシェア」ボタンをここに移動 ―― -->
   <div class="share-buttons">
-    <a id="shareX" class="btn" target="_blank">Xでシェア</a>
-    <span id="shareIG" class="btn">Instagram用コピー</span>
+    <a id="shareX" class="btn share-btn" target="_blank">
+      <img src="icons/logo-black.png" alt="Xアイコン">
+    </a>
   </div>
 
   <script>
@@ -145,19 +401,22 @@
     document.getElementById("loveDetail").textContent = details[idx].love;
     document.getElementById("otherDetail").textContent = details[idx].other;
 
-    document.getElementById("shareX").href =
-      `https://twitter.com/intent/tweet?text=${encodeURIComponent(`#ワンオラクル 結果 #${idx} ${titles[idx]} 「${messages[idx]}」`)}&url=${encodeURIComponent(location.href)}`;
 
-    document.getElementById("shareIG").addEventListener("click", ()=>{
-      navigator.clipboard.writeText(location.href)
-        .then(()=> alert("URLをコピーしました。\nInstagramでシェアしてください。"))
-        .catch(()=> alert("コピーに失敗しました。"));
-    });
+     const currentUrl = location.href;
+    const cardHash = `#${idx} ${titles[idx]}`;
+    const mainMsg = messages[idx];
+    const detail = details[idx];
+    const shareText =
+      `ワンオラクルの結果\n` +
+      `${cardHash} 「${mainMsg}」\n\n` +
+      `${currentUrl}`;
+
+    // X（Twitter）用のリンクをセット
+    const shareX = document.getElementById("shareX");
+    shareX.href = 
+      `https://twitter.com/intent/tweet?` +
+      `text=${encodeURIComponent(shareText)}`;
   </script>
-</body>
-</html>
-
-  <!-- Resultからindexに戻るボタン -->
-  <a id="homeBtn" href="index.html" class="btn">サイトトップに戻る</a>
+    </div><!-- /.container -->
 </body>
 </html>
