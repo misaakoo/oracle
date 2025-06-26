@@ -844,6 +844,86 @@ section#hints::before {
   z-index: 0;
   pointer-events: none;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ２）見出しに余白＋スクロールオフセット */
+.for_more_detail h3 {
+  /* 固定ヘッダー等がある場合は scroll-margin-top をヘッダー高さに */
+  scroll-margin-top: 80px;  /* 必要に応じて調整 */
+  /* セクション間の上下余白 */
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ３）本文の余白 */
+.for_more_detail p {
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+/* （目次部分は既存のスタイルがある前提） */
+
+
+
+/* -------------------
+   目次全体のラッパー
+   ------------------- */
+.toc-block {
+  background-color: #f5eaf2;  /* 既存の紫 */
+  border-radius: 8px;         /* お好みで */
+  max-width: 700px;           /* 必要に応じて */
+  margin: 2rem auto;          /* 自動センター + 上下余白 */
+
+  /* ✨ ここがポイント ✨ */
+  /* 1) 固定heightがあれば外す */
+  /* 2) padding-top/bottomを均等かつ小さめに */
+  padding: 2rem 1.5rem;       /* 上下2rem／左右1.5rem */
+
+  /* 3) 項目を縦中央にしたいなら flexbox に */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* 子要素を縦方向中央寄せ */
+}
+
+/* -------------------
+   目次タイトル（「目次」）の下線＆余白
+   ------------------- */
+.toc-block .toc-title {
+  margin: 0 0 1.25rem;        /* 下にだけ余白 */
+  padding-bottom: .5rem;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+/* -------------------
+   リスト本体
+   ------------------- */
+.toc-block .toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-block .toc-list li {
+  margin-bottom: .75rem;
+}
+
+.toc-block .toc-list li:last-child {
+  margin-bottom: 0;
+}
+
+.toc-block .toc-list a {
+  display: block;
+  padding: .25rem 0;          /* リンク内の上下空間 */
+  color: #333;
+  text-decoration: none;
+}
 </style>
 
 
@@ -1073,33 +1153,64 @@ section#hints::before {
     </div>
   </section>
 
-  <!-- Aboutセクション -->
-  <section id="about">
-    <a id="about_h1"></a>
-    <div class="divider_block"></div>
-    <div class="for_more_detail tarot">
-      <h1 class="article_ttl_h1"><span>About</span></h1>
-      <span class="underline_wide_img"></span>
-     <div class="toc-block">
-  <h3 class="toc-title" data-number="04">目次</h3>
-  <ol class="toc-list">
-    <li>
-      <a href="#about_content">
-        <span class="toc-num">01</span>
-        概要
-      </a>
-    </li>
-  </ol>
-</div>
+<!-- Aboutセクション -->
+<section id="about">
+  <a id="about_h1"></a>
+  <div class="divider_block"></div>
+  <div class="for_more_detail tarot">
+    <h1 class="article_ttl_h1"><span>About</span></h1>
+    <span class="underline_wide_img"></span>
 
-      <div class="articles">
-        <div id="about_content" class="article">
-          <p class="text_main">ワンオラクルは１枚引きのタロット占いです。質問を具体的にイメージして引くことで、深いヒントが得られます。</p>
-        </div>
-      </div>
+    <!-- 目次 -->
+    <div class="toc-block">
+      <h3 class="toc-title" data-number="04">目次</h3>
+      <ol class="toc-list">
+        <li>
+          <a href="#about_h3_1">
+            <span class="toc-num">01</span>
+            カード制作背景
+          </a>
+        </li>
+        <li>
+          <a href="#about_h3_2">
+            <span class="toc-num">02</span>
+            カードに込めた思い
+          </a>
+        </li>
+        <li>
+          <a href="#about_h3_3">
+            <span class="toc-num">03</span>
+            作者紹介
+          </a>
+        </li>
+      </ol>
     </div>
-  </section>
 
+    <!-- 各セクション -->
+    <h3 id="about_h3_1">カード制作背景</h3>
+    <p>
+      このオラクルカードは、古来より使われてきた自然の象徴をモチーフに制作しました。カード一枚一枚に、
+      四季折々の植物や動物を描き、その形状や色にも意味を込めています。制作の際には水彩画を用い、
+      柔らかなタッチを心がけました。
+    </p>
+
+    <h3 id="about_h3_2">カードに込めた思い</h3>
+    <p>
+      私がこのカードに込めたのは「小さな気づきが人生を豊かにする」というメッセージです。
+      日々の中で見過ごしがちなサインや直感を大切にしてほしいという願いを込め、
+      シンボル一つひとつにキーワードを添えています。
+    </p>
+
+    <h3 id="about_h3_3">作者紹介</h3>
+    <p>
+      イラストレーター・タロットリーダーの山田花子です。これまでに
+      個人セッションやワークショップを多数開催し、のべ500名以上の
+      方々にカードリーディングを行ってきました。現在はオンラインでの
+      講座も展開中です。
+    </p>
+
+  </div>
+</section>
 
   <footer style="padding:2em 0">
     <p>&copy; 2025 ワンオラクル</p>
