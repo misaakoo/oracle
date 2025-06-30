@@ -48,18 +48,18 @@
     中央コンテナ（白帯）
   ------------------------*/
 .container {
-  background-color: #FFFFFF;
+  background-color: #fff;
   width: 90%;
-  max-width: 800px;
+  max-width: 1100px;
   margin: 0 auto;
-  box-sizing: border-box;
+  /* ↓ ここに追加 */
+  padding-top: var(--header-height-mobile);
 }
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .container {
-    width: 100%;
+    padding-top: var(--header-height-desktop);
   }
 }
-
   /*------------------------
     固定ヘッダー
   ------------------------*/
@@ -924,12 +924,53 @@ html {
   color: #333;
   text-decoration: none;
 }
+
+/* index.html の <style> 内、セクション共通の下あたりに追加してください */
+section#intro {
+  background-color: #ffffff;
+  border-radius: 8px;
+   margin: 0 auto 2em;
+  padding: 2em 1.5em;
+  max-width: 800px;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  section#intro {
+    margin-top: calc(var(--header-height-desktop) + 1em);
+  }
+}
+
+section#intro .intro-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5em;
+  color: #441c26;
+}
+
+section#intro .intro-cta .btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
 </style>
 
 
 </head>
 <body>
    <div class="container">
+
+     <!-- ① ここからイントロを追加 -->
+    <section id="intro" class="intro">
+      <h1 class="section-title">はじめに</h1>
+      <p class="intro-text">
+        ワンオラクルは、〈あなたの今〉にフォーカスしたシンプルな1枚引きのオラクルカード占いサイトです。  
+        毎日のヒントや行動のアドバイスを、カード1枚から受け取ってみましょう。
+      </p>
+      <p class="intro-cta">
+        <a class="btn" href="#hero">まずはカードを引いてみる</a>
+      </p>
+    </section>
+    <!-- ① ここまで -->
   <!-- ヘッダー -->
  <header>
   <nav>
@@ -938,20 +979,20 @@ html {
       <li>
         <a href="#hero">
           <img src="icons/00.png" alt="トップアイコン">
-          <span>引く</span>
+          <span>draw</span>
         </a>
       </li>
       <!-- ───────────────────────── -->
       <li>
         <a href="#cards">
           <img src="icons/01.png" alt="カード一覧">
-          <span>一覧</span>
+          <span>list</span>
         </a>
       </li>
       <li>
         <a href="#explanation">
           <img src="icons/02.png" alt="解説">
-          <span>やり方</span>
+          <span>How to</span>
         </a>
       </li>
       <li>

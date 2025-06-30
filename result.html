@@ -41,7 +41,7 @@
     text-align: center;
     line-height: 1.6;
     margin: 0;
-      padding-top: calc(var(--header-height-mobile) + 0em);
+
   }
 
   /*------------------------
@@ -299,6 +299,26 @@ section#hints {
   #cardSubTitle {
     margin-top: 1em;
   }
+
+.container {
+  background-color: #fff;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  /* ヘッダー分だけ上に引き上げ */
+  margin-top: calc(-1 * var(--header-height-mobile));
+  /* ヘッダー高さ + 1.5em の余白を内側に */
+  padding-top: calc(var(--header-height-mobile) + 1.5em);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+}
+@media (min-width: 768px) {
+  .container {
+    margin-top: calc(-1 * var(--header-height-desktop));
+    padding-top: calc(var(--header-height-desktop) + 6em);
+  }
+}
   </style>
 </head>
 <body>
@@ -306,9 +326,9 @@ section#hints {
  <header>
       <nav>
         <ul>
-           <li><a href="index.html#hero"><img src="icons/00.png" alt="トップアイコン"><span>引く</span></a></li>
-          <li><a href="index.html#cards"><img src="icons/01.png" alt="一覧"><span>一覧</span></a></li>
-          <li><a href="index.html#explanation"><img src="icons/02.png" alt="やり方"><span>やり方</span></a></li>
+           <li><a href="index.html#hero"><img src="icons/00.png" alt="トップアイコン"><span>draw</span></a></li>
+          <li><a href="index.html#cards"><img src="icons/01.png" alt="一覧"><span>list</span></a></li>
+          <li><a href="index.html#explanation"><img src="icons/02.png" alt="やり方"><span>How to</span></a></li>
           <li><a href="index.html#qa"><img src="icons/03.png" alt="Q&A"><span>Q&A</span></a></li>
           <li><a href="index.html#about"><img src="icons/04.png" alt="About"><span>About</span></a></li>
         </ul>
